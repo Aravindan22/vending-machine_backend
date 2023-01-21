@@ -1,0 +1,260 @@
+{
+	"info": {
+		"_postman_id": "f26c43c1-3df9-4b3a-a90d-4c76583d08b5",
+		"name": "Vending Machine",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "List Departments",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/list/departments",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"list",
+						"departments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Doctors in Department",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/list/department/doctor?department=General Medicine",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"list",
+						"department",
+						"doctor"
+					],
+					"query": [
+						{
+							"key": "department",
+							"value": "General Medicine"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Token",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/generate_tkn?doctor=Jane Doe&department=General Medicine",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"generate_tkn"
+					],
+					"query": [
+						{
+							"key": "doctor",
+							"value": "Jane Doe"
+						},
+						{
+							"key": "department",
+							"value": "General Medicine"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Select Token",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/select_doctor?department=General Medicine&doctor=Jane Doe&next_token=G-JD-2",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"select_doctor"
+					],
+					"query": [
+						{
+							"key": "department",
+							"value": "General Medicine"
+						},
+						{
+							"key": "doctor",
+							"value": "Jane Doe"
+						},
+						{
+							"key": "next_token",
+							"value": "G-JD-2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulting",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/consulting?token=G-JD-2",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"consulting"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "G-JD-2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Diagonsed",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/diagonsed?token=G-JD-1",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"diagonsed"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "G-JD-1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Next Patient",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/next_patient?token=G-JD-1&doctor=Jane Doe&department=General Medicine",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"next_patient"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "G-JD-1"
+						},
+						{
+							"key": "doctor",
+							"value": "Jane Doe"
+						},
+						{
+							"key": "department",
+							"value": "General Medicine"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reset Token",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/reset_tkn?doctor=Jane Doe",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"reset_tkn"
+					],
+					"query": [
+						{
+							"key": "doctor",
+							"value": "Jane Doe"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Waiting time",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/waiting_time?token=G-JD-3",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"waiting_time"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "G-JD-3"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "localhost:8000",
+			"type": "default"
+		}
+	]
+}
