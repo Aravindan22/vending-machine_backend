@@ -1,12 +1,13 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+import os
 
-DB_NAME="vending-machine"
-DB_USER="2owmshm2357i6m46q2ol"
-DB_PASSWORD="pscale_pw_tvZWeTZ60i482f7SZdEkTKmL0L5qx3AA1UCjJRxnjNi"
-DB_HOST="us-east.connect.psdb.cloud"
-DB_PORT=3306
+DB_NAME=os.environ.get("DB_NAME")
+DB_USER=os.environ.get("DB_USER")
+DB_PASSWORD=os.environ.get("DB_PASSWORD")
+DB_HOST=os.environ.get("DB_HOST")
+DB_PORT=os.environ.get("DB_PORT")
 MYSQL_ATTR_SSL_CA="/etc/ssl/certs/ca-certificates.crt"
 
 
