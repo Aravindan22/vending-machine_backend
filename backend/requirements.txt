@@ -1,4 +1,4 @@
-sqlaclhemy
+SQLAlchemy
 fastapi
 uvicorn
 mysql-connector-python
