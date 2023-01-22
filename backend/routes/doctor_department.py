@@ -109,6 +109,7 @@ def add_doctor(department:str, doctor:str, db:Session(get_db),response:Response,
         else:
             db.add(DoctorDepartmentModel(doctor=doctor, department=department))
             db.commit()
+            return {"Message": "Success"}
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=e)
 
