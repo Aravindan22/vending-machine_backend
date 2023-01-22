@@ -3,6 +3,5 @@ builder = "DOCKERFILE"
 dockerfilePath = "Dockerfile"
 
 [deploy]
-startCommand  = "docker run -d vending-machine_backend"
 restartPolicyType = "ON_FAILURE"
 restartPolicyMaxRetries = 12
