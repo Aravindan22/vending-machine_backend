@@ -4,7 +4,7 @@ from backend.database import  get_db
 from backend.models.department_doctor_model import DoctorDepartment as DoctorDepartmentModel
 from backend.models.token_model import Token as TokenModel
 from backend.schemas.doctor_department_schema import DoctorDepartment as DoctorDepartmentSchema
-from fastapi import APIRouter,Depends, HTTPException, status
+from fastapi import APIRouter,Depends, HTTPException, status, Response
 
 router = APIRouter()
 
@@ -98,6 +98,20 @@ def update_diagonsed(token:str, db:Session=Depends(get_db), status_code = status
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
     else:
         raise HTTPException(status_code=status.HTTP_406_NOT_ACCEPTABLE, detail="Wrong token")
+
+@router.put("/add_doctor")
+def add_doctor(department:str, doctor:str, db:Session(get_db),response:Response, status_code = status.HTTP_200_OK):
+    try:
+        query = db.query(DoctorDepartmentModel).filter(DoctorDepartmentModel.doctor == doctor, DoctorDepartmentModel.department == department)
+        if query.count() >0:
+            response.status_code = status.HTTP_409_CONFLICT
+            return {"Message": "Doctor with that name is already exists"}
+        else:
+            db.add(DoctorDepartmentModel(doctor=doctor, department=department))
+            db.commit()
+    except Exception as e:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=e)
+
 
 
 
