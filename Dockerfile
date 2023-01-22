@@ -6,4 +6,4 @@ RUN pip install --no-cache-dir --upgrade -r /requirements.txt
 COPY ./ /
 EXPOSE 80
 RUN echo $PORT
-CMD ["python -m uvicorn", "backend.main:app","--proxy-headers", "--host", "0.0.0.0", "--port", $PORT]
+ENTRYPOINT ["python -m uvicorn", "backend.main:app","--proxy-headers", "--host", "0.0.0.0", "--port", 80]
