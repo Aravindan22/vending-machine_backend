@@ -1,9 +1,6 @@
 
 # Vending Machine Backend
 
-
-
-
 ## Run Locally
 
 Clone the project
