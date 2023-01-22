@@ -63,3 +63,14 @@ def getTokenStatus(token:str, db:Session=Depends(get_db)):
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
+@router.get("/get_patients")
+def get_patients(doctor:str, db:Session=Depends(get_db), status_code = status.HTTP_200_OK):
+    try:
+        today = datetime.datetime.today().strftime("%Y-%m-%d")
+        tmrw = (datetime.datetime.today()+datetime.timedelta(days=1)).strftime("%Y-%m-%d")
+        query = db.query(TokenModel).filter(TokenModel.doctor == doctor,TokenModel.created_time.between(today,tmrw))
+        if query.first() is not None:
+            return {"details":  query.all()}
+    except Exception as e:
+        print(e)
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST)
