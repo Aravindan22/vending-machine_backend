@@ -24,7 +24,7 @@ app.add_middleware(
 
 @app.get("/")
 def ping():
-    return { "pong": "hello world"}
+    return { "pong": "Hello world"}
 
 
 """
