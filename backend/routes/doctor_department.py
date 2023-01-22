@@ -99,13 +99,5 @@ def update_diagonsed(token:str, db:Session=Depends(get_db), status_code = status
     else:
         raise HTTPException(status_code=status.HTTP_406_NOT_ACCEPTABLE, detail="Wrong token")
 
-@router.get("/get_patients")
-def get_patients(doctor:str, db:Session=Depends(get_db), status_code = status.HTTP_200_OK):
-    try:
-        query = db.query(TokenModel).filter(TokenModel.doctor == doctor)
-        if query.first() is not None:
-            return {"details":  query.all()}
-    except Exception as e:
-        print(e)
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST)
+
 
