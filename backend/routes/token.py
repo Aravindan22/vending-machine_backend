@@ -31,7 +31,7 @@ def reset_token(doctor:str, db:Session=Depends(get_db), status_code = status.HTT
         print(query.all())
         query.update({TokenModel.diagonsed:1}, synchronize_session=False)
         db.commit()
-        return {"messgae":"Success"}
+        return {"message":"Success"}
     except Exception as e:
         print(e)
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
@@ -43,8 +43,9 @@ def reset_waiting_time(token:str, db:Session=Depends(get_db)):
         if token == "" or token == None:
             raise Exception()
         token_condition = f"{'-'.join(token.split('-')[:2])}%"
-        print(token_condition)
-        query = db.query(TokenModel.token).filter( TokenModel.token.like(token_condition))
+        today = datetime.datetime.today().strftime("%Y-%m-%d")
+        tmrw = (datetime.datetime.today()+datetime.timedelta(days=1)).strftime("%Y-%m-%d")
+        query = db.query(TokenModel.token).filter( TokenModel.token.like(token_condition),TokenModel.created_time.between(today,tmrw))
         res = query.count()
         return {"waitingTime":f"{res*10}"}
     except Exception as e:
