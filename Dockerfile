@@ -1,7 +1,7 @@
 FROM python:3.9
-WORKDIR /backend
+WORKDIR /
 
-COPY ./requirements.txt /backend/requirements.txt 
-RUN pip install --no-cache-dir --upgrade -r /backend/requirements.txt
-COPY ./backend /backend/app
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
+COPY ./requirements.txt /requirements.txt 
+RUN pip install --no-cache-dir --upgrade -r //requirements.txt
+COPY ./ /
+CMD ["uvicorn", "backend.main:app", "--host", "0.0.0.0", "--port", "80"]
