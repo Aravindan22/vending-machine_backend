@@ -32,7 +32,7 @@ def list_departments_doctor(department:str, db:Session= Depends(get_db), status_
 def list_departments_doctor(department:str,doctor:str, next_token:str, db:Session= Depends(get_db), status_code = status.HTTP_200_OK):
     message = "Token Success"
     try:
-        res =  db.query(TokenModel).filter(TokenModel.department == department,TokenModel.doctor == doctor, TokenModel.diagonsed != 1).count()
+        res =  db.query(TokenModel).filter(TokenModel.department == department,TokenModel.doctor == doctor).count()
         token = f'{department[0]}-{"".join([x[0] for x in doctor.split(" ")])}-{str(res+1)}'
         if token == next_token or res == 0:
 
