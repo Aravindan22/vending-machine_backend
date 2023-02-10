@@ -45,7 +45,7 @@ def reset_waiting_time(token:str, db:Session=Depends(get_db)):
         token_condition = f"{'-'.join(token.split('-')[:2])}%"
         today = datetime.datetime.today().strftime("%Y-%m-%d")
         tmrw = (datetime.datetime.today()+datetime.timedelta(days=1)).strftime("%Y-%m-%d")
-        query = db.query(TokenModel.token).filter( TokenModel.token.like(token_condition),TokenModel.created_time.between(today,tmrw))
+        query = db.query(TokenModel.token).filter( TokenModel.token.like(token_condition),TokenModel.created_time.between(today,tmrw),TokenModel.diagonsed != 1)
         res = query.count()
         return {"waitingTime":f"{res*10}"}
     except Exception as e:
